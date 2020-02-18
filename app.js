@@ -2,6 +2,8 @@ const express = require("express");
 const exphbs  = require('express-handlebars');
 const bodyParser = require("body-parser");
 
+const productModel = require("./models/products");
+
 
 const app = express();
 
@@ -20,7 +22,7 @@ app.set('view engine', 'handlebars');
 
 app.get("/",(req,res)=>{
 
-    res.render("home.handlebars",{
+    res.render("home",{
         title:"Home Page"
     });
 
@@ -29,7 +31,7 @@ app.get("/",(req,res)=>{
 
 app.get("/contact-us",(req,res)=>{
 
-    res.render("contactus.handlebars",{
+    res.render("contactus",{
         title:"Contact Us Page"
     });
 
@@ -39,8 +41,12 @@ app.get("/contact-us",(req,res)=>{
 
 app.get("/products",(req,res)=>{
 
-    res.render("product.handlebars",{
-        title:"Product Page"
+    
+
+
+    res.render("product",{
+        title:"Product Page",
+        products : productModel.getallProducts()
     });
 
 });
